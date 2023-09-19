@@ -119,3 +119,25 @@ pulse_df =
 ```
 
 
+## Base R ...
+
+```{r}
+litter_df = 
+  read.csv("data/FAS_litters.csv") # don't do the read.csv in general
+
+
+litters_df$Gr # will guess the full name, which may cause ambiguous outcomes.
+```
+
+## Save the cleaned csv file
+
+```{r}
+litters_df_cleaned = 
+  read_csv("data/FAS_litters.csv")
+
+litters_df_cleaned = 
+  janitor::clean_names(litters_df_cleaned)
+
+write_csv(litters_df_cleaned, "data/litters_cleaned.csv")
+```
+
