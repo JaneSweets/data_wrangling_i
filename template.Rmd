@@ -3,3 +3,119 @@ title: "Simple document"
 output: github_document
 ---
 
+```{r}
+library(tidyverse)
+library(readxl)
+library(haven)
+```
+
+
+Let's import the `FAS_litters.csv` csv.
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv")
+
+litters_df = 
+  janitor::clean_names(litters_df)
+```
+
+Import the same dataset using an absolute path.
+
+```{r}
+litters_df_abs = 
+  read_csv("D:/Columbia/Data_Science/Data_Wrangling/data_wrangling_i/data/FAS_litters.csv")
+
+litters_df_abs = 
+  janitor::clean_names(litters_df_abs)
+```
+
+
+Now, try import the `FAS_pups.csv` dataset.
+```{r}
+pups_df = 
+  read_csv("data/FAS_pups.csv")
+
+pups_df = 
+  janitor::clean_names(pups_df)
+```
+
+Absolute path.
+```{r}
+pups_df_abs = 
+  read_csv("D:/Columbia/Data_Science/Data_Wrangling/data_wrangling_i/data/FAS_pups.csv")
+
+pups_df_abs = 
+  janitor::clean_names(pups_df_abs)
+```
+
+## Look at data
+```{r}
+head(litters_df)
+tail(litters_df)
+```
+
+You can use `view`.
+
+```{r}
+View(litters_df)
+```
+
+Look at a data summary.
+
+```{r}
+str(litters_df)
+
+skimr::skim(litters_df)
+```
+
+## Options in `read_*`
+
+```{r}
+litters_df = 
+  read_csv(
+    "data/FAS_litters.csv",
+    skip = 10, col_names = F
+  )
+```
+
+Look at NA values.
+
+```{r}
+litters_df = 
+  read_csv(
+    "data/FAS_litters.csv",
+    na = c("NA", 19)
+  )
+```
+
+Column types
+
+```{r}
+litters_df = 
+  read_csv(
+    "data/FAS_litters.csv",
+    col_types = 
+      cols(
+        `GD0 weight` = col_factor()
+      )
+  )
+```
+
+## Other file 
+
+Import a xlsx file first.
+
+```{r}
+mlb_df = 
+  read_excel("data/mlb11.xlsx")
+```
+
+Import a SAS file.
+
+```{r}
+pulse_df = 
+  read_sas("data/public_pulse_data.sas7bdat")
+```
+
+
