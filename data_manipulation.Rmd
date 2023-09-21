@@ -1,0 +1,46 @@
+---
+title: "data_manipulation"
+author: "Shaolei Ma"
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+Import FAS litters and pus.
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv")
+litters_df = janitor::clean_names(litters_df)
+
+pups_df = 
+  read_csv("data/FAS_pups.csv")
+pups_df = janitor::clean_names(pups_df)
+```
+
+## `select`
+
+`select` is used to select columns!
+
+```{r}
+select(litters_df, group, litter_number, gd0_weight)
+
+select(litters_df, group, gd0_weight:gd_of_birth) # select multiple columns
+
+select(litters_df, group, starts_with("pups"), contains("pups"))
+
+select(litters_df, -ends_with("e"))
+
+select(litters_df, group, litter_id = litter_number, everything()) # select & rename & keep everything else
+
+select(litters_df, gd0_weight, everything()) # used when wanna order sth and keep everything else
+```
+
+```{r}
+rename(litters_df, litter_id = litter_number)
+relocate(litters_df, litter_number)
+```
+
